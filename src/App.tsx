@@ -1,11 +1,32 @@
 import { Button } from '@mui/material'
-import React, { useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
+import axios from "axios"
 import "./style/App.css"
+import { IMovie } from './types/types'
 
-const App = () => {
-  let [lives, setLives] = useState(3)
-  const [word, setWord] = useState("")
+interface IFunction {
+  result: any[]
+}
+
+const App: FC<IFunction> = () => {
+  let [lives, setLives] = useState<number>(3)
+  const [movie, setMovie] = useState<IMovie | null>(null)
+  const [word, setWord] = useState<string>("")
   let timeWord = ""
+
+  useEffect(() => {
+    fetchMovie()
+  }, [])
+
+  async function fetchMovie() {
+    try {
+      const response = await axios.get<IMovie>("https://api.themoviedb.org/4/list/1?api_key=444c52fd849cb709c3c163664ef393b8")
+      setMovie(response.data)
+      console.log(movie?.results.map(result => console.log(result.overview)))
+    } catch (e) {
+      alert(e) 
+    }
+  }
 
   const checkLives = () => {
     timeWord = word
