@@ -1,11 +1,11 @@
 import { Button } from '@mui/material'
-import React, { FC, useContext, useEffect, useState } from 'react'
-import "../style/App.css"
-import { IMovie } from '../types/types'
-import MyModal from '../components/ui/modal/MyModal'
-import data from "../movie.json"
+import React, { FC, useState } from 'react'
 import { useHistory } from "react-router-dom"
+import LettersView from '../components/LettersView'
+import MyModal from '../components/ui/modal/MyModal'
 import MyModalTwo from '../components/ui/modalTwo/MyModalTwo'
+import data from "../movie.json"
+import "../style/App.css"
 
 const GuessPage: FC = () => {
     let limit = 10
@@ -17,6 +17,7 @@ const GuessPage: FC = () => {
     const [idPage, setIdPage] = useState<number>(1)
     const nameMovie = data.results[idPage].title
     const hintMovie = data.results[idPage].overview
+    const arrayNameMovie = nameMovie.split("")
 
     const checkLives = () => {
         setWord(word)
@@ -45,10 +46,12 @@ const GuessPage: FC = () => {
             </div>
             <hr />
             <div className="app__down">
-                <h3>{data.name}</h3>
+                <h3>Theme: {data.name}</h3>
                 <div className="down__lives">Your lives: {lives}</div>
                 <div className="down__word">
-                    <input type="text" placeholder={nameMovie} value={word} onChange={(e) => setWord(e.target.value)} />
+                    {arrayNameMovie.map(letter =>
+                        <LettersView props={letter}/>
+                    )}
                 </div>
                 <div className="button__send">
                     <Button variant="contained" onClick={() => {
