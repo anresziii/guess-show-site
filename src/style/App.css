@@ -36,3 +36,8 @@
 .button__send {
   margin: 0 0 20px 0;
 }
+
+.hint__block {
+  position: relative;
+  z-index: 1;
+}

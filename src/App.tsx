@@ -11,7 +11,7 @@ const App: FC = () => {
         <Route path="/home">
           <StartPage />
         </Route>
-        <Route path="/guess">
+        <Route path="/guess/:id">
           <GuessPage />
         </Route>
         <Redirect to="/home" />

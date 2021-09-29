@@ -2,31 +2,30 @@ import { Button } from '@mui/material'
 import React, { FC, useEffect, useState } from 'react'
 import "../style/App.css"
 import { IMovie } from '../types/types'
-import axios from "axios"
+import MyModal from '../components/ui/modal/MyModal'
+import data from "../movie.json"
+import MyHint from '../components/ui/hint/MyHint'
+import { useHistory } from "react-router-dom"
 
 const GuessPage: FC = () => {
     const [word, setWord] = useState<string>("")
+    const [modal, setModal] = useState(false)
     let timeWord = ""
     const [movie, setMovie] = useState<IMovie | null>(null)
     let [lives, setLives] = useState<number>(3)
+    const router = useHistory()
+
+    useEffect(() => {
+        localStorage.setItem("wrongAnswer", "0");
+    }, [])
 
     const checkLives = () => {
         timeWord = word
         if (timeWord === "lives") {
             setLives(lives - 1)
-        }
-    }
-
-    useEffect(() => {
-        fetchMovie()
-    }, [])
-
-    async function fetchMovie() {
-        try {
-            const response = await axios.get<IMovie>("https://api.themoviedb.org/4/list/1?api_key=444c52fd849cb709c3c163664ef393b8")
-            setMovie(response.data)
-        } catch (e) {
-            alert(e)
+            let wrongAnswerLocal = parseInt(JSON.parse(localStorage.getItem("wrongAnswer")!))
+            wrongAnswerLocal += 1
+            localStorage.setItem("wrongAnswer", wrongAnswerLocal.toString())
         }
     }
 
@@ -48,7 +47,13 @@ const GuessPage: FC = () => {
                         setWord("")
                     }}>Send</Button>
                 </div>
-                <Button variant="contained" onClick={() => console.log(timeWord)}>Hint</Button>
+                <div className="hint__block">
+                    <MyModal visible={modal} setVisible={setModal}>
+                        <MyHint />
+                    </MyModal>
+                </div>
+                <Button variant="contained" onClick={() => setModal(true)}>Hint</Button>
+                <Button variant="contained" onClick={() => router.push("/home")}>Back</Button>
             </div>
         </div>
     )
