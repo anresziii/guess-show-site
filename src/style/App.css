@@ -41,3 +41,15 @@
   position: relative;
   z-index: 1;
 }
+
+.hint__button {
+  margin: 0 0 20px 0;
+}
+
+.next__button {
+  margin: -35px 0 0 175px;
+}
+
+.button__start {
+  margin: 20px 0 20px 0;
+}
