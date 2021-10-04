@@ -56,28 +56,12 @@
 }
 
 .letters__block {
-  margin-left: -40px;
+  min-width: 20px;
+  margin-left: 5px;
 }
 
-.letters__list {
-  display: flex;
-  justify-content: center;
-}
-
-.letters__list li {
-  list-style-type: none;
-}
-
-.letters__input {
-  border: none;
-  width: 20px;
-  height: 30px;
-  border-bottom: 1px solid black;
-  margin-right: 2px;
-  background: lightgray;
-}
-
-.letters__input:focus {
-  outline: 0;
-  outline-offset: 0;
+.letter__string {
+  text-align: center;
+  font-size: 30px;
+  border-bottom: 2px solid lightgray;
 }
