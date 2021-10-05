@@ -1,10 +1,6 @@
 import React, { useState, FC } from 'react'
 import '../style/App.css'
 
-interface ISettings {
-    letters: any
-}
-
 interface ILetters {
     props: any
     letters: any

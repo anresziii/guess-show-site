@@ -2,6 +2,7 @@ import { Button } from '@mui/material'
 import { truncateSync } from 'fs'
 import React, { FC, useEffect, useState } from 'react'
 import { useHistory } from "react-router-dom"
+import GeneratedKey from '../components/GeneratedKey'
 import LettersView from '../components/LettersView'
 import MyModal from '../components/ui/modal/MyModal'
 import MyModalTwo from '../components/ui/modalTwo/MyModalTwo'
@@ -14,12 +15,9 @@ const GuessPage: FC = () => {
     const [modal, setModal] = useState(false)
     const [modalTwo, setModalTwo] = useState(false)
     const [lives, setLives] = useState<number>(3)
-    const [idPage, setIdPage] = useState<number>(1)
-    const [keyBoard, setKeyBoard] = useState("")
+    const [idPage, setIdPage] = useState<number>(0)
     const nameMovie = data.results[idPage].title
     const hintMovie = data.results[idPage].overview
-    const indexArray: number[] = []
-    const arrayNameMovie = nameMovie.split(" ").join("").split("");
 
     const checkLives = () => {
         setWord(word)
@@ -40,21 +38,6 @@ const GuessPage: FC = () => {
         }
     }
 
-    document.addEventListener("keydown", e => {
-        const key = e.key
-        setKeyBoard(key)
-    })
-
-    const changeArrayNameMovie = () => {
-        for (let i = arrayNameMovie.length / 3; i >= 0; i--) {
-            const randomIndex = Math.floor(Math.random() * arrayNameMovie.length)
-            arrayNameMovie.splice(randomIndex, 1, " ")
-            indexArray.push(randomIndex)
-        }
-        return arrayNameMovie
-    }
-    const newArrayNameMovie = changeArrayNameMovie()
-
     return (
         <div>
             <div className="app__up">
@@ -66,9 +49,7 @@ const GuessPage: FC = () => {
                 <h3>Theme: {data.name}</h3>
                 <div className="down__lives">Your lives: {lives}</div>
                 <div className="down__word">
-                    {newArrayNameMovie.map(letter =>
-                        <LettersView letters={letter} props={letter} />
-                    )}
+                    <GeneratedKey idpage={idPage} props={undefined}/>
                 </div>
                 <div className="button__send">
                     <Button variant="contained" onClick={() => {

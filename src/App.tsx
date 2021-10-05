@@ -9,6 +9,7 @@ const App: FC = () => {
   useEffect(() => {
     localStorage.setItem("wrongAnswer", "0");
     localStorage.setItem("rightAnswer", "0");
+    localStorage.setItem("idPage", "0");
   }, [])
 
   return (

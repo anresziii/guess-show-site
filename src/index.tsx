@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC, useState } from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 
