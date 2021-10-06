@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useMemo, useEffect } from 'react'
 import LettersView from './LettersView';
 import data from "../movie.json"
 
@@ -25,13 +25,16 @@ const GeneratedKey: FC<IGenerated> = (props) => {
     }
     const newArrayNameMovie = changeArrayNameMovie()
 
-    const getKey = (e: any) => {
-        const key = e.key
-        setKeyBoard(key)
-        document.removeEventListener('keyup', getKey);
-    }
+    useEffect(() => {
+        const getKey = (e: any) => {
+            const key = e.key
+            console.log(key)
+            setKeyBoard(key)
+            document.removeEventListener('keyup', getKey);
+        }
 
-    document.addEventListener("keyup", getKey)
+        document.addEventListener("keyup", getKey)
+    }, [])
 
     return (
         <div>
