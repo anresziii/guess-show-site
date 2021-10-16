@@ -17,7 +17,7 @@ const StartPage: FC = () => {
             <hr />
             <div className="app__down">
                 <div className="button__start">
-                    <Button variant="contained" onClick={() => router.push("/guess")}>Start</Button>
+                    <Button variant="contained" onClick={() => router.push("/guess/1")}>Start</Button>
                 </div>
                 <div className="hint__block">
                     <MyModal visible={modal} setVisible={setModal}>
